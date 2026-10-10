@@ -4,12 +4,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Test {
-
-    private static final Logger log = LogManager.getLogger(Test.class);
+    private static final Logger Log = LogManager.getLogger(Test.class);
 
     public static void main(String[] args) {
-        GuardarContacto.guardar();
-		log.info("Se guardó el Archivo");
-        System.out.println("El programa se sigue ejecutando");
+    	
+        try {
+            String telefono = "0981234567";
+            ValidarContacto.validarTelefono(telefono);
+            GuardarContacto.guardar(telefono);
+            LeerContacto.leer();
+
+            Log.info("Se guardo el telefono de forma exitosa");
+        } catch (IllegalArgumentException e) {
+            Log.error("Ocurrio un error: " + e);
+        }
     }
 }

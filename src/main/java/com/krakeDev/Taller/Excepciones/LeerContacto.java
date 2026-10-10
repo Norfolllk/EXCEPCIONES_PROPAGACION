@@ -21,19 +21,27 @@ public class LeerContacto {
             
             lector = new BufferedReader(lectorArchivo);
             
+            for (int i = 0; i < 0; i++) {
+            
             System.out.println(lector.readLine());
+            }
             
             log.info("Se pudo leer exitosamente");
         } catch (FileNotFoundException e) {
-            log.error("Ocurrio un error al buscar el archivo: " + e); 
-        } catch (IOException e) {
             log.error("Ocurrio un error al encontrar el archivo: " + e); 
+        } catch (IOException e) {
+            log.error("Ocurrio un error al leer el archivo: " + e); 
         } finally { 
-            try {
-                lectorArchivo.close();
-            	lector.close(); 
+            try { 
+                if (lectorArchivo != null) { 
+                    lectorArchivo.close();
+                }
+                if (lector != null) { 
+                    lector.close();
+                }
                 log.info("Se cerro exitosamente"); 
             } catch (IOException e) { 
+                // TODO Auto-generated catch block 
                 e.printStackTrace();
             }
         }

@@ -8,22 +8,25 @@ import org.apache.logging.log4j.Logger;
 
 public class GuardarContacto {
 
-	private static final Logger Log = LogManager.getLogger(GuardarContacto.class);
+	private static final Logger log = LogManager.getLogger(GuardarContacto.class);
 
-	public static void guardar() { 
+	public static void guardar(String telefono) { 
 	    FileWriter escritor = null;
 	    try {
 	        escritor = new FileWriter("contactos.txt");
 	        escritor.write("Nombre: Maria \n");
-	        escritor.write("Apellido: Gomez \n"); 
-	        escritor.write("Telefono: 0981234567 \n");
-	        Log.info("Se guardo exitosamente");
-	    } catch (Exception e) {
-	        Log.error("Ocurrio un error: " + e); 
-	    } finally {
-	        try { 
-	            escritor.close(); 
-	            Log.info("Se cerro el escritor exitosamente"); 
+	        escritor.write("Apellido: Gomez \n");
+	        escritor.write("Telefono: " + telefono + "\n");
+	        
+	        log.info("Se guardo exitosamente"); 
+	    } catch (IOException e) {
+	        log.error("Ocurrio un error: " + e); 
+	    } finally { 
+	        try {
+	            if (escritor != null) {
+	                escritor.close();
+	                log.info("Se cerro el escritor exitosamente");
+	            }
 	        } catch (IOException e) { 
 	            e.printStackTrace();
 	        }
